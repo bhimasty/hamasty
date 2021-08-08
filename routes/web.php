@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Admin\DashboardController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -13,6 +14,12 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+// Route::get('/', function () {
+//     return view('pages.admin.dashboard');
+// });
+
+Route::prefix('dashboard')
+    ->namespace('Admin')
+    ->group(function () {
+        Route::get('/', 'DashboardController@index')->name('dashboard');
+    });
