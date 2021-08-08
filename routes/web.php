@@ -14,12 +14,11 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-// Route::get('/', function () {
-//     return view('pages.admin.dashboard');
-// });
+Route::get('/', 'HomeController@index')->name('homepage');
+Route::get('/detail', 'DetailController@index')->name('detail');
+Route::get('/checkout', 'CheckoutController@index')->name('checkout');
+Route::get('/success', 'CheckoutController@success')->name('success');
 
-Route::prefix('dashboard')
-    ->namespace('Admin')
-    ->group(function () {
-        Route::get('/', 'DashboardController@index')->name('dashboard');
-    });
+Route::prefix('dashboard')->namespace('Admin')->group(function () {
+    Route::get('/', 'DashboardController@index')->name('dashboard');
+});
