@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Admin\DashboardController;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -14,11 +15,13 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', 'HomeController@index')->name('homepage');
+Route::get('/', 'HomeController@index')->name('home');
 Route::get('/detail', 'DetailController@index')->name('detail');
 Route::get('/checkout', 'CheckoutController@index')->name('checkout');
 Route::get('/success', 'CheckoutController@success')->name('success');
 
-Route::prefix('admin')->namespace('Admin')->group(function () {
+Route::prefix('admin')->namespace('Admin')->middleware(['auth', 'admin'])->group(function () {
     Route::get('/', 'DashboardController@index')->name('dashboard');
 });
+
+Auth::routes();
