@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Admin\DashboardController;
+use App\Http\Controllers\Admin\TravelPackageController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
@@ -22,6 +23,7 @@ Route::get('/success', 'CheckoutController@success')->name('success');
 
 Route::prefix('admin')->namespace('Admin')->middleware(['auth', 'admin'])->group(function () {
     Route::get('/', 'DashboardController@index')->name('dashboard');
+    Route::resource('travel-package', 'TravelPackageController');
 });
 
 Auth::routes(['verify' => true]);
